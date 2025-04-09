@@ -135,8 +135,8 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#link">
-                                                <span className="text-nowrap">Start Building</span>
+                                            <Link href="/Collaborate">
+                                                <span className="text-nowrap">Start Collaborating</span>
                                             </Link>
                                         </Button>
                                     </div>
