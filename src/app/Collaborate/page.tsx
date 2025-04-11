@@ -1,3 +1,6 @@
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { div } from 'motion/react-client';
 import React from 'react';
 
 export default function Collaborate() {
@@ -7,7 +10,14 @@ export default function Collaborate() {
             <p className="mt-4 text-lg text-gray-600">
                 We're excited to have you here. Start collaborating and building amazing things!
             </p>
-            <button className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 cursor-pointer"> Collaborate Now </button>
+            <div className="mt-6">
+                <Link href="/Editor" passHref>
+                    <Button className="flex items-center cursor-pointer">
+                        Collaborate Now
+                    </Button>
+                </Link>
+            </div>
         </div>
+
     );
 }
