@@ -1,8 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Editor from "react-simple-code-editor"
 import Prism from "prismjs"
+import { io } from "socket.io-client"
+import { useRouter } from "next/navigation"
+
+// Initialize WebSocket connection with explicit backend URL
+const socket = io("http://localhost:5000")
 
 // Import Prism languages
 import "prismjs/components/prism-javascript"
@@ -22,16 +27,63 @@ export function CodeEditor({
   value = "",
   language = "javascript",
   onChange,
+  roomId: propRoomId,
 }: {
   value?: string
   language?: string
   onChange?: (value: string) => void
+  roomId?: string
 }) {
   const [code, setCode] = useState(value)
+  const [roomId, setRoomId] = useState<string | undefined>(propRoomId)
+  const router = useRouter()
+
+  useEffect(() => {
+    // Fallback to retrieve roomId from localStorage if not passed as a prop
+    if (!propRoomId) {
+      const currentUserData = localStorage.getItem("currentUser");
+      const storedRoomId = currentUserData ? JSON.parse(currentUserData).roomId : undefined;
+      if (storedRoomId) {
+        setRoomId(storedRoomId);
+      } else {
+        console.error("Room ID is missing in both props and localStorage. Redirecting to login.");
+        router.push("/"); // Redirect to login page
+      }
+    }
+  }, [propRoomId, router]);
+
+  useEffect(() => {
+    if (!roomId) {
+      return
+    }
+
+    const currentUserData = localStorage.getItem("currentUser")
+    const name = currentUserData ? JSON.parse(currentUserData).name : "Anonymous"
+
+    // Join the room when the component mounts
+    socket.emit("joinRoom", { roomId, name })
+
+    // Listen for code updates from the server
+    socket.on("codeUpdate", (updatedCode: string) => {
+      setCode(updatedCode)
+    })
+
+    // Request the current code state when joining the room
+    socket.emit("requestCode", roomId)
+
+    // Cleanup on component unmount
+    return () => {
+      socket.emit("leaveRoom", roomId)
+      socket.off("codeUpdate")
+    }
+  }, [roomId])
 
   const handleValueChange = (code: string) => {
     setCode(code)
     onChange?.(code)
+
+    // Send the updated code to the server
+    socket.emit("codeChange", { roomId, code })
   }
 
   // Determine which language to use for highlighting

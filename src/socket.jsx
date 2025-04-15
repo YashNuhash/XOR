@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-let socket; // Declare a shared socket instance
+export let socket; // Declare a shared socket instance
 
 export const initSocket = async () => {
   if (!socket) {
