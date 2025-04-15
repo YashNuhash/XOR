@@ -15,37 +15,62 @@ const io = new Server(server, {
 });
 
 const rooms = {}; // Store room data
+const roomCode = {}; // Store code for each room
+const roomProfiles = {}; // Store profiles for each room
 
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
 
   // Handle joining a room
-  socket.on("joinRoom", ({ roomId, name }) => {
+  socket.on("joinRoom", (data) => {
+    if (!data || typeof data !== "object" || !data.roomId || !data.name) {
+      console.error("Invalid joinRoom payload:", data);
+      return;
+    }
+
+    const { roomId, name } = data;
+
     if (!rooms[roomId]) {
       rooms[roomId] = [];
+      roomCode[roomId] = ""; // Initialize room code as empty
+      roomProfiles[roomId] = {}; // Initialize profiles for the room
     }
+
+    // Join the socket.io room first
+    socket.join(roomId);
 
     // Check if the user is already in the room
     const isUserInRoom = rooms[roomId].some((user) => user.name === name);
     if (!isUserInRoom) {
-      // Assign a peopleId based on the number of members
       const peopleId = (rooms[roomId].length % 4) + 1;
       const newUser = { id: socket.id, name, peopleId };
 
       rooms[roomId].push(newUser);
+      roomProfiles[roomId][socket.id] = { name, peopleId }; // Store profile data
 
-      // Notify all clients in the room
+      // Ensure profiles are updated before broadcasting
       io.to(roomId).emit("updateRoom", rooms[roomId]);
+      io.to(roomId).emit("updateProfiles", roomProfiles[roomId]); // Send updated profiles
 
-      // Send the current room data to the newly connected client
+      // Send the current room data and code to the newly connected client
       socket.emit("updateRoom", rooms[roomId]);
+      socket.emit("updateProfiles", roomProfiles[roomId]); // Send profiles to the new user
+      socket.emit("codeUpdate", roomCode[roomId]);
 
-      // Join the socket.io room
-      socket.join(roomId);
       console.log(`${name} joined room ${roomId}`);
     } else {
-      // If the user is already in the room, send the current room data
+      // If the user is already in the room, send the current room data and profiles
       socket.emit("updateRoom", rooms[roomId]);
+      socket.emit("updateProfiles", roomProfiles[roomId]);
+      socket.emit("codeUpdate", roomCode[roomId]);
+    }
+  });
+
+  // Handle code changes
+  socket.on("codeChange", ({ roomId, code }) => {
+    if (roomCode[roomId] !== undefined) {
+      roomCode[roomId] = code; // Update the room's code
+      socket.to(roomId).emit("codeUpdate", code); // Broadcast the updated code to others in the room
     }
   });
 
@@ -53,7 +78,10 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     for (const roomId in rooms) {
       rooms[roomId] = rooms[roomId].filter((user) => user.id !== socket.id);
+      delete roomProfiles[roomId][socket.id]; // Remove profile data
+
       io.to(roomId).emit("updateRoom", rooms[roomId]);
+      io.to(roomId).emit("updateProfiles", roomProfiles[roomId]); // Send updated profiles
     }
     console.log("A user disconnected:", socket.id);
   });
