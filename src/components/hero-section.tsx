@@ -1,11 +1,14 @@
-import React from 'react'
-import Link from 'next/link'
-import { ArrowRight, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { TextEffect } from '@/components/ui/text-effect'
-import { AnimatedGroup } from '@/components/ui/animated-group'
-import { HeroHeader } from '@/components/hero5-header'
+"use client";
+
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { TextEffect } from '@/components/ui/text-effect';
+import { AnimatedGroup } from '@/components/ui/animated-group';
+import { HeroHeader } from '@/components/hero5-header';
+import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 
 const transitionVariants = {
     item: {
@@ -25,7 +28,7 @@ const transitionVariants = {
             },
         },
     },
-}
+};
 
 export default function HeroSection() {
     return (
@@ -82,7 +85,7 @@ export default function HeroSection() {
                                     <Link
                                         href="#link"
                                         className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
-                                        <span className="text-foreground text-sm">Introducing Support for AI Models</span>
+                                        <span className="text-foreground text-sm"> 🚀 Coming Soon: Animated Tooltip in The Editor</span>
                                         <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
                                         <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
@@ -97,24 +100,27 @@ export default function HeroSection() {
                                         </div>
                                     </Link>
                                 </AnimatedGroup>
-
                                 <TextEffect
                                     preset="fade-in-blur"
                                     speedSegment={0.3}
                                     as="h1"
-                                    className="mt-8 text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                    Modern Solutions for Customer Engagement
+                                    className="text-gray-300 relative z-20 py-8 text-4xl font-bold sm:text-7xl">
+                                    Code Together, Anywhere.
                                 </TextEffect>
                                 <TextEffect
-                                    per="line"
                                     preset="fade-in-blur"
                                     speedSegment={0.3}
-                                    delay={0.5}
-                                    as="p"
-                                    className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                                    Highly customizable components for building modern websites and applications that look and feel the way you mean it.
+                                    as="h1"
+                                    className="text-gray-300 relative text-2xl sm:text-2xl">
+                                    Collaborate in Realtime, Boost Productivity
                                 </TextEffect>
-
+                                <TextEffect
+                                    preset="fade-in-blur"
+                                    speedSegment={0.3}
+                                    as="h1"
+                                    className="text-gray-300 relative  text-2xl sm:text-2xl">
+                                    & Streamline Your Development Workflow.
+                                </TextEffect>
                                 <AnimatedGroup
                                     variants={{
                                         container: {
@@ -127,33 +133,28 @@ export default function HeroSection() {
                                         },
                                         ...transitionVariants,
                                     }}
-                                    className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
-                                    <div
+                                    >
+                                    {/* <div
                                         key={1}
-                                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5">
-                                        <Button
-                                            asChild
-                                            size="lg"
-                                            className="rounded-xl px-5 text-base">
-                                            <Link href="/Collaborate">
-                                                <span className="text-nowrap">Start Collaborating</span>
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                    <Button
-                                        key={2}
-                                        asChild
-                                        size="lg"
-                                        variant="ghost"
-                                        className="h-10.5 rounded-xl px-5">
-                                        <Link href="#link">
-                                            <span className="text-nowrap">Request a demo</span>
-                                        </Link>
-                                    </Button>
+                                        className="relative w-full">
+                                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/9 z-10">
+                                             <Button
+                                                asChild
+                                                size="lg"
+                                                className="rounded-xl px-5 py-2 text-base bg-black/80 border border-gray-800 text-gray-100 hover:bg-white/90 hover:text-black">
+                                                <Link href="/Collaborate">
+                                                    <span className="text-nowrap">Start Collaborating</span>
+                                                </Link>
+                                            </Button> 
+                                        </div>
+                                    </div> */}
+                                    <div className="flex justify-center">
+    <GoogleGeminiEffect autoAnimate={true} />
+</div>
                                 </AnimatedGroup>
                             </div>
                         </div>
-
+{/* 
                         <AnimatedGroup
                             variants={{
                                 container: {
@@ -171,116 +172,29 @@ export default function HeroSection() {
                                     aria-hidden
                                     className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                                 />
-                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <Image
-                                        className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                                        src="/mail2.png"
-                                        alt="app screen"
-                                        width="2700"
-                                        height="1440"
-                                    />
-                                    <Image
-                                        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                                        src="/mail2-light.png"
-                                        alt="app screen"
-                                        width="2700"
-                                        height="1440"
-                                    />
-                                </div>
-                            </div>
-                        </AnimatedGroup>
-                    </div>
-                </section>
-                <section className="bg-background pb-16 pt-16 md:pb-32">
-                    <div className="group relative m-auto max-w-5xl px-6">
-                        <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
-                            <Link
-                                href="/"
-                                className="block text-sm duration-150 hover:opacity-75">
-                                <span> Meet Our Customers</span>
-
-                                <ChevronRight className="ml-1 inline-block size-3" />
-                            </Link>
-                        </div>
-                        <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14">
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-5 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/nvidia.svg"
-                                    alt="Nvidia Logo"
-                                    height="20"
-                                    width="auto"
-                                />
-                            </div>
-
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-4 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/column.svg"
-                                    alt="Column Logo"
-                                    height="16"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-4 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/github.svg"
-                                    alt="GitHub Logo"
-                                    height="16"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-5 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/nike.svg"
-                                    alt="Nike Logo"
-                                    height="20"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-5 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
-                                    alt="Lemon Squeezy Logo"
-                                    height="20"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-4 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/laravel.svg"
-                                    alt="Laravel Logo"
-                                    height="16"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-7 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/lilly.svg"
-                                    alt="Lilly Logo"
-                                    height="28"
-                                    width="auto"
-                                />
-                            </div>
-
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-6 w-fit dark:invert"
-                                    src="https://html.tailus.io/blocks/customers/openai.svg"
-                                    alt="OpenAI Logo"
-                                    height="24"
-                                    width="auto"
-                                />
-                            </div>
-                        </div>
+                                {/* <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl p-[8px] bg-gradient-to-r from-fuchsia-600 to-purple-600">
+                                    <div className="bg-background inset-shadow-2xs ring-background dark:inset-shadow-white/20 relative rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                                        <Image
+                                            className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
+                                            src="https://images.unsplash.com/photo-1548064471-d765fc1bc3ca?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            alt="app screen"
+                                            width="2700"
+                                            height="1440"
+                                        />
+                                        <Image
+                                            className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
+                                            src="https://images.unsplash.com/photo-1548064471-d765fc1bc3ca?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            alt="app screen"
+                                            width="2700"
+                                            height="1440"
+                                        />
+                                    </div>
+                                </div> */}
+                            {/* </div> */}
+                        {/* </AnimatedGroup> */}
                     </div>
                 </section>
             </main>
         </>
-    )
+    );
 }
