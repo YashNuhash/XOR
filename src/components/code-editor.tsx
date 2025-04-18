@@ -6,14 +6,13 @@ import Prism from "prismjs"
 import { initSocket } from "@/socket"
 import { useRouter } from "next/navigation"
 
-// Import Prism languages
 import "prismjs/components/prism-javascript"
 import "prismjs/components/prism-jsx"
 import "prismjs/components/prism-typescript"
 import "prismjs/components/prism-tsx"
 import "prismjs/components/prism-css"
 import "prismjs/components/prism-markup"
-// Add new language imports
+
 import "prismjs/components/prism-c"
 import "prismjs/components/prism-cpp"
 import "prismjs/components/prism-java"
@@ -53,7 +52,7 @@ export function CodeEditor({
   }, [])
 
   useEffect(() => {
-    // Fallback to retrieve roomId from localStorage if not passed as a prop
+    // Fallback to retrieve the roomId from localStorage if not passed as a prop
     if (!propRoomId) {
       const currentUserData = localStorage.getItem("currentUser");
       const storedRoomId = currentUserData ? JSON.parse(currentUserData).roomId : undefined;
@@ -91,6 +90,7 @@ export function CodeEditor({
   }, [socket, roomId])
 
   const handleValueChange = (newCode: string) => {
+    // Update local state and call the onChange prop if provided
     setCode(newCode)
     onChange?.(newCode)
 
