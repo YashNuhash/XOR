@@ -14,10 +14,16 @@ export function ErrorSection7() {
           <Typography
             variant="h1"
             className="mt-10 text-blue-gray-700 !text-3xl !leading-snug md:!text-4xl"
+            placeholder="Enter text here" // Example placeholder
+            onPointerEnterCapture={() => {}} // Example event handler
+            onPointerLeaveCapture={() => {}}
           >
             Error 404 <br /> It looks like something went wrong.
           </Typography>
-          <Typography className="mt-8 mb-14 text-[18px] font-normal text-gray-500 mx-auto md:max-w-sm">
+          <Typography className="mt-8 mb-14 text-[18px] font-normal text-gray-500 mx-auto md:max-w-sm"
+            placeholder="Enter text here" // Example placeholder
+            onPointerEnterCapture={() => {}} // Example event handler
+            onPointerLeaveCapture={() => {}}>
             Don&apos;t worry, our team is already on it.Please try refreshing
             the page or come back later.
           </Typography>
