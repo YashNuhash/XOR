@@ -13,6 +13,7 @@
 # testing
 /coverage
 /XOR-backend
+/backend
 
 # next.js
 /.next/
