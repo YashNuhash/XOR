@@ -14,21 +14,24 @@ const transitionVariants = {
     item: {
         hidden: {
             opacity: 0,
-            filter: 'blur(12px)',
             y: 12,
+            filter: 'blur(4px)',
         },
         visible: {
             opacity: 1,
-            filter: 'blur(0px)',
             y: 0,
+            filter: 'blur(0px)', // no animation on this
             transition: {
                 type: 'spring',
                 bounce: 0.3,
                 duration: 1.5,
+                // Do not animate filter (prevents negative values)
+                filter: { duration: 0.001 },
             },
         },
     },
 };
+
 
 export default function HeroSection() {
     return (

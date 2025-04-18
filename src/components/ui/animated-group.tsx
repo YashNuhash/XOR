@@ -51,12 +51,24 @@ const presetVariants: Record<PresetType, Variants> = {
     visible: { scale: 1 },
   },
   blur: {
-    hidden: { filter: 'blur(4px)' },
-    visible: { filter: 'blur(0px)' },
+    hidden: { opacity: 0, filter: 'blur(4px)' },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      transition: { filter: { duration: 0.001 } },
+    },
   },
   'blur-slide': {
-    hidden: { filter: 'blur(4px)', y: 20 },
-    visible: { filter: 'blur(0px)', y: 0 },
+    hidden: { opacity: 0, filter: 'blur(4px)', y: 20 },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      transition: {
+        y: { type: 'spring', bounce: 0.3, duration: 1.2 },
+        filter: { duration: 0.001 }, // prevent animation of blur
+      },
+    },
   },
   zoom: {
     hidden: { scale: 0.5 },
@@ -94,6 +106,7 @@ const presetVariants: Record<PresetType, Variants> = {
     },
   },
 };
+
 
 const addDefaultVariants = (variants: Variants) => ({
   hidden: { ...defaultItemVariants.hidden, ...variants.hidden },

@@ -71,16 +71,39 @@ const presetVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: 'blur(12px)' },
-      visible: { opacity: 1, filter: 'blur(0px)' },
-      exit: { opacity: 0, filter: 'blur(12px)' },
+      visible: {
+        opacity: 1,
+        filter: 'blur(0px)',
+        transition: { filter: { duration: 0.001 } },
+      },
+      exit: {
+        opacity: 0,
+        filter: 'blur(12px)',
+        transition: { filter: { duration: 0.001 } },
+      },
     },
   },
   'fade-in-blur': {
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, y: 20, filter: 'blur(12px)' },
-      visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
-      exit: { opacity: 0, y: 20, filter: 'blur(12px)' },
+      visible: {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transition: {
+          y: { type: 'spring', bounce: 0.3, duration: 1.2 },
+          filter: { duration: 0.001 },
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: 20,
+        filter: 'blur(12px)',
+        transition: {
+          filter: { duration: 0.001 },
+        },
+      },
     },
   },
   scale: {
@@ -108,6 +131,7 @@ const presetVariants: Record<
     },
   },
 };
+
 
 const AnimationComponent: React.FC<{
   segment: string;
