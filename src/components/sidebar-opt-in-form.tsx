@@ -6,9 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { SidebarInput } from "@/components/ui/sidebar"
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react"
 
 export function SidebarOptInForm() {
   const router = useRouter();
+  const [isNavigated, setIsNavigated] = useState(false);
 
   const handleCopyRoomId = () => {
     const currentUserData = localStorage.getItem("currentUser");
@@ -35,8 +37,19 @@ export function SidebarOptInForm() {
       }
       localStorage.removeItem("currentUser");
     }
-    router.push("/");
+     router.push("/");
+    setIsNavigated(true);
   };
+  
+  useEffect(() => {
+    if (isNavigated) {  
+      router.refresh();
+      toast("You have left the room", { duration: 2000 });
+      setIsNavigated(false);
+    }
+  }, [isNavigated, router]);
+
+
 
   return (
     <Card className="shadow-none">
@@ -50,7 +63,7 @@ export function SidebarOptInForm() {
           >
             Copy Room ID
           </Button>
-          <Link href="/">
+          {/* <Link href="/" passHref> */}
           <Button
             className="w-full bg-sidebar-foreground text-sidebar-primary-foreground shadow-none cursor-pointer"
             size="sm"
@@ -58,7 +71,7 @@ export function SidebarOptInForm() {
           >
             Leave Room
           </Button>
-          </Link>
+          {/* </Link> */}
           
         </CardContent>
       </form>
