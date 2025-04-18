@@ -7,8 +7,7 @@ import { io } from "socket.io-client"
 import { useRouter } from "next/navigation"
 
 // Initialize WebSocket connection with explicit backend URL
-const socket = io("http://localhost:5000")
-
+const socket = io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000');
 // Import Prism languages
 import "prismjs/components/prism-javascript"
 import "prismjs/components/prism-jsx"
