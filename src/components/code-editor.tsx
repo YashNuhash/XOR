@@ -3,11 +3,9 @@
 import { useState, useEffect } from "react"
 import Editor from "react-simple-code-editor"
 import Prism from "prismjs"
-import { io } from "socket.io-client"
+import { initSocket } from "@/socket"
 import { useRouter } from "next/navigation"
 
-// Initialize WebSocket connection with explicit backend URL
-const socket = io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000');
 // Import Prism languages
 import "prismjs/components/prism-javascript"
 import "prismjs/components/prism-jsx"
@@ -35,7 +33,24 @@ export function CodeEditor({
 }) {
   const [code, setCode] = useState(value)
   const [roomId, setRoomId] = useState<string | undefined>(propRoomId)
+  const [socket, setSocket] = useState<any>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    // Initialize socket connection
+    const init = async () => {
+      const socketInstance = await initSocket()
+      setSocket(socketInstance)
+    }
+    init()
+
+    return () => {
+      // Cleanup socket connection
+      if (socket) {
+        socket.disconnect()
+      }
+    }
+  }, [])
 
   useEffect(() => {
     // Fallback to retrieve roomId from localStorage if not passed as a prop
@@ -46,43 +61,44 @@ export function CodeEditor({
         setRoomId(storedRoomId);
       } else {
         console.error("Room ID is missing in both props and localStorage. Redirecting to login.");
-        router.push("/"); // Redirect to login page
+        router.push("/");
       }
     }
   }, [propRoomId, router]);
 
   useEffect(() => {
-    if (!roomId) {
-      return
+    if (!socket || !roomId) {
+      return;
     }
 
     const currentUserData = localStorage.getItem("currentUser")
     const name = currentUserData ? JSON.parse(currentUserData).name : "Anonymous"
 
-    // Join the room when the component mounts
+    // Join the room when socket is ready and we have a roomId
     socket.emit("joinRoom", { roomId, name })
 
-    // Listen for code updates from the server
+    // Listen for code updates from other users
     socket.on("codeUpdate", (updatedCode: string) => {
+      console.log("Received code update:", updatedCode)
       setCode(updatedCode)
     })
 
-    // Request the current code state when joining the room
-    socket.emit("requestCode", roomId)
-
-    // Cleanup on component unmount
+    // Cleanup listeners on unmount
     return () => {
-      socket.emit("leaveRoom", roomId)
       socket.off("codeUpdate")
+      socket.emit("leaveRoom", roomId)
     }
-  }, [roomId])
+  }, [socket, roomId])
 
-  const handleValueChange = (code: string) => {
-    setCode(code)
-    onChange?.(code)
+  const handleValueChange = (newCode: string) => {
+    setCode(newCode)
+    onChange?.(newCode)
 
-    // Send the updated code to the server
-    socket.emit("codeChange", { roomId, code })
+    // Only emit code changes if socket is connected and we have a roomId
+    if (socket && roomId) {
+      console.log("Emitting code change:", newCode)
+      socket.emit("codeChange", { roomId, code: newCode })
+    }
   }
 
   // Determine which language to use for highlighting
