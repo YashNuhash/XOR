@@ -10,7 +10,7 @@ XOR is a modern collaborative code editor that enables real-time code collaborat
 ### Team Name: Red_Asgardians
 
 - Ashraful Nuhash - 2001011040
-- Shahriar Jahan - 2001011048
+- Nafis Hasan Arif - 2001011048
 
 ### Course Name
 
