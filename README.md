@@ -1,15 +1,24 @@
-![Static Badge](https://img.shields.io/badge/Link-blue?style=plastic&logo=Drive&logoColor=Blue&label=Live-Demo&labelColor=Green&link=https://xor-code.vercel.app/)
-![Static Badge](https://img.shields.io/badge/Link-blue?style=plastic&logo=Drive&logoColor=Blue&label=Presenatation&labelColor=Green&link=https://tinyurl.com/3ja5usxd)
-![Static Badge](https://img.shields.io/badge/Link-blue?style=plastic&logo=Drive&logoColor=Blue&label=Documentation&labelColor=Green&link=https://tinyurl.com/4sbcddhh)
-![Static Badge](https://img.shields.io/badge/Link-blue?style=plastic&logo=Drive&logoColor=Blue&label=Backend-Repository&labelColor=Green&link=https://github.com/YashNuhash/XOR-backend)
-![Static Badge](https://img.shields.io/badge/MIT-blue?style=plastic&logo=Drive&logoColor=Blue&label=License&labelColor=Green&link=https://github.com/YashNuhash/XOR-backend)
-![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2FYashNuhash%2FXOR&leftColor=808080&rightColor=3469e5&type=total&label=Visitors&style=none)
 
 # XOR - Realtime Collaborative Code Editor
 
 ![XOR](image.png)
 
-XOR is a modern collaborative code editor that enables real-time code collaboration. Built with Next.js, Socket.IO. It provides a seamless environment for developers to code together.
+XOR is a modern collaborative code editor that enables real-time code collaboration. Built with Next.js, Socket.IO. It provides a seamless environment for developers to code together. 
+
+## Academic Information
+
+### Team Name: Red_Asgardians
+
+- Ashraful Nuhash - 2001011040
+- Shahriar Jahan - 2001011048
+
+### Course Name
+
+#### Web Engineering Lab Course (CSE-3106)
+
+### Instructor
+
+#### Md. Mynoddin, Assistant Professor, Department of CSE, RMSTU
 
 ## 🎥 Demo Video: 
 
@@ -129,4 +138,6 @@ npm run dev
 ## 👥 Contributors
 
 - [Ashraful Nuhash](https://github.com/YashNuhash)
-- [Nafis Hasan](https://github.com/NafisHasan2020)
+- [Nafis Hasan](https://github.com/NafisHasan2020) 
+
+![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2FYashNuhash%2FXOR&leftColor=808080&rightColor=3469e5&type=total&label=Visitors&style=none)
