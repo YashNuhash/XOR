@@ -1,5 +1,5 @@
 
-# XOR - Realtime Collaborative Code Editor
+# XOR - Realtime Collaborative Code Editor ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2FYashNuhash%2FXOR&leftColor=808080&rightColor=3469e5&type=total&label=Visitors&style=none)
 
 ![XOR](image.png)
 
@@ -140,4 +140,3 @@ npm run dev
 - [Ashraful Nuhash](https://github.com/YashNuhash)
 - [Nafis Hasan](https://github.com/NafisHasan2020) 
 
-![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2FYashNuhash%2FXOR&leftColor=808080&rightColor=3469e5&type=total&label=Visitors&style=none)
