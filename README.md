@@ -3,7 +3,7 @@
 
 ![XOR](image.png)
 
-XOR is a modern collaborative code editor that enables real-time code collaboration. Built with Next.js, Socket.IO. It provides a seamless environment for developers to code together. 
+XOR is a Realtime Collaborative Code Editor that Enables Real-time Code Collaboration. Built with Next.js, Socket.IO. It  Provides a Range of Powerful Features Like Instant Code Synchronization While Code Changes to Across all the Users
 
 ## Academic Information
 
